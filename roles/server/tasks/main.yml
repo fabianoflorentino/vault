@@ -1,0 +1,47 @@
+---
+- name: Add Hashicorp Repo
+  yum_repository:
+    name: hashicorp
+    description: Hashicorp Stable - $basearch
+    baseurl: https://rpm.releases.hashicorp.com/RHEL/$releasever/$basearch/stable
+    gpgcheck: yes
+    enabled: yes
+    gpgkey: https://rpm.releases.hashicorp.com/gpg
+
+- name: Get stats of the Consul Download
+  package:
+    name: consul
+    state: latest
+
+- name: Copy the Consul configuration file
+  template:
+    src: consul.hcl.j2
+    dest: /etc/consul.d/consul.hcl
+    backup: yes
+  notify: Start the Consul service
+
+- name: "Ajust Certificates Permission"
+  file:
+    state: directory
+    path: "{{ path_certificate }}"
+    owner: consul
+    group: consul
+    recurse: yes
+    mode: 0644
+
+- name: "Ajust Directory Permission"
+  file:
+    state: directory
+    path: "{{ item }}"
+    owner: consul
+    group: consul
+    mode: 0755
+  loop:
+    - "{{ data_dir }}"
+    - "{{ path_certificate }}"
+
+- name: Start the Consul service
+  service:
+    name: consul
+    state: started
+    enabled: yes

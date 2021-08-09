@@ -1,0 +1,20 @@
+server = {{ server }}
+node_name = "{{ inventory_hostname }}"
+datacenter = "{{ datacenter }}"
+data_dir = "{{ data_dir }}"
+bind_addr = "0.0.0.0"
+client_addr = "0.0.0.0"
+advertise_addr = "{{ ansible_host }}"
+bootstrap_expect = {{ bootstrap_expect }}
+retry_join = ["{{ retry_join.to_join[0] }}","{{ retry_join.to_join[1] }}","{{ retry_join.to_join[2] }}"]
+verify_incoming = {{verify_incoming}}
+verify_outgoing = {{ verify_outgoing }}
+verify_server_hostname = {{ verify_server_hostname }}
+ca_file = "{{ ca_file }}"
+cert_file = "{{ cert_file }}"
+key_file = "{{ key_file }}"
+ui_config {
+    enabled = {{ ui_config_enabled }}
+}
+log_level = "{{ log_level }}"
+enable_syslog = {{ enable_syslog }}
