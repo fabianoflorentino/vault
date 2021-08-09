@@ -1,22 +1,12 @@
 ---
-verify_incoming: "true"
-verify_outgoing: "true"
-verify_server_hostname: "true"
-path_certificate: "/consul/data/certificates/ssl"
-ca_file: "{{ path_certificate }}/ca.pem"
-cert_file: "{{ path_certificate }}/server.pem"
-key_file: "{{ path_certificate }}/server.key"
-server: "true"
-datacenter: "dc1"
-data_dir: "/consul/data"
-bind_addr: "0.0.0.0"
-client_addr: "0.0.0.0"
-bootstrap_expect: 3
-retry_join:
-  to_join:
-    - "{{ groups['server'][0] }}"
-    - "{{ groups['server'][1] }}"
-    - "{{ groups['server'][2] }}"
-ui_config_enabled: "true"
-log_level: "DEBUG"
-enable_syslog: "true"
+listener_tcp_address: "0.0.0.0"
+listener_tcp_port: "8200"
+cluster_address: "{{ ansible_host }}"
+cluster_port: "8201"
+tls_disable: true
+storage: "consul"
+storage_address: "0.0.0.0"
+storage_port: "8500"
+storage_path: "vault/"
+api_addr: "http://{{ inventory_hostname }}"
+cluster_addr: "https://{{ inventory_hostname }}"

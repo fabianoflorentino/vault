@@ -1,0 +1,13 @@
+listener "tcp" {
+  address          = "{{ listener_tcp_address }}:{{ listener_tcp_port }}"
+  cluster_address  = "{{ cluster_address }}:{{ cluster_port }}"
+  tls_disable      = "{{ tls_disable }}"
+}
+
+storage "{{ storage }}" {
+  address = "{{ storage_address }}:{{ storage_port }}"
+  path    = "{{ storage_path }}"
+}
+
+api_addr = "{{ api_addr }}:{{ listener_tcp_port }}"
+cluster_addr = "{{ cluster_addr }}:{{ cluster_port }}"

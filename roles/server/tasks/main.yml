@@ -8,24 +8,24 @@
     enabled: yes
     gpgkey: https://rpm.releases.hashicorp.com/gpg
 
-- name: Get stats of the Consul Download
+- name: Get stats of the Vault Download
   package:
-    name: consul
+    name: vault
     state: latest
 
-- name: Copy the Consul configuration file
+- name: Copy the Vault configuration file
   template:
-    src: consul.hcl.j2
-    dest: /etc/consul.d/consul.hcl
+    src: vault.hcl.j2
+    dest: /etc/vault.d/vault.hcl
     backup: yes
-  notify: Start the Consul service
+  notify: Start the Vault service
 
 - name: "Ajust Certificates Permission"
   file:
     state: directory
     path: "{{ path_certificate }}"
-    owner: consul
-    group: consul
+    owner: vault
+    group: vault
     recurse: yes
     mode: 0644
 
@@ -33,15 +33,15 @@
   file:
     state: directory
     path: "{{ item }}"
-    owner: consul
-    group: consul
+    owner: vault
+    group: vault
     mode: 0755
   loop:
     - "{{ data_dir }}"
     - "{{ path_certificate }}"
 
-- name: Start the Consul service
+- name: Start the Vault service
   service:
-    name: consul
+    name: vault
     state: started
     enabled: yes

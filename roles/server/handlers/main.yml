@@ -1,7 +1,7 @@
 ---
 
-- name: Start the Consul service
+- name: Start the vault service
   service:
-    name: consul
+    name: vault
     state: restarted
     enabled: yes
