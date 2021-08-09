@@ -1,6 +1,6 @@
 ---
 
-- name: Start the vault service
+- name: "Start the Vault service"
   service:
     name: vault
     state: restarted
