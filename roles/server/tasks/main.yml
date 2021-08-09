@@ -18,7 +18,7 @@
     src: vault.hcl.j2
     dest: /etc/vault.d/vault.hcl
     backup: yes
-  notify: Start the Vault service
+  notify: "Start the Vault service"
 
 - name: "Ajust Certificates Permission"
   file:
