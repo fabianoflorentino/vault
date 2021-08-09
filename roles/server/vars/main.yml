@@ -3,10 +3,22 @@ listener_tcp_address: "0.0.0.0"
 listener_tcp_port: "8200"
 cluster_address: "{{ ansible_host }}"
 cluster_port: "8201"
-tls_disable: true
+tls_disable: false
+unauthenticated_metrics_access: true
+unauthenticated_pprof_access: true
 storage: "consul"
-storage_address: "0.0.0.0"
+storage_address: "127.0.0.1"
 storage_port: "8500"
 storage_path: "vault/"
+ui: true
+tls_require_and_verify_client_cert: false
+tls_disable_client_certs: true
+
 api_addr: "http://{{ inventory_hostname }}"
 cluster_addr: "https://{{ inventory_hostname }}"
+
+data_dir: "/vault/data"
+path_certificate: "/vault/data/certificates/ssl"
+ca_file: "{{ path_certificate }}/ca.pem"
+cert_file: "{{ path_certificate }}/server.pem"
+key_file: "{{ path_certificate }}/server.key"

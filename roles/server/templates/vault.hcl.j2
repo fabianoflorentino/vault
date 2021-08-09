@@ -2,6 +2,14 @@ listener "tcp" {
   address          = "{{ listener_tcp_address }}:{{ listener_tcp_port }}"
   cluster_address  = "{{ cluster_address }}:{{ cluster_port }}"
   tls_disable      = "{{ tls_disable }}"
+  tls_cert_file    = "{{ cert_file }}"
+  tls_key_file     = "{{ key_file }}"
+  telemetry {
+    unauthenticated_metrics_access = "{{ unauthenticated_metrics_access }}"
+  }
+  profiling {
+    unauthenticated_pprof_access = "{{ unauthenticated_pprof_access }}"
+  }
 }
 
 storage "{{ storage }}" {
@@ -9,5 +17,6 @@ storage "{{ storage }}" {
   path    = "{{ storage_path }}"
 }
 
+ui = "{{ ui }}"
 api_addr = "{{ api_addr }}:{{ listener_tcp_port }}"
 cluster_addr = "{{ cluster_addr }}:{{ cluster_port }}"
