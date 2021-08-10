@@ -1,9 +1,11 @@
 listener "tcp" {
-  address          = "{{ listener_tcp_address }}:{{ listener_tcp_port }}"
-  cluster_address  = "{{ cluster_address }}:{{ cluster_port }}"
-  tls_disable      = "{{ tls_disable }}"
-  tls_cert_file    = "{{ cert_file }}"
-  tls_key_file     = "{{ key_file }}"
+  address                               = "{{ listener_tcp_address }}:{{ listener_tcp_port }}"
+  cluster_address                       = "{{ cluster_address }}:{{ cluster_port }}"
+  tls_disable                           = "{{ tls_disable }}"
+  tls_cert_file                         = "{{ cert_file }}"
+  tls_key_file                          = "{{ key_file }}"
+  tls_require_and_verify_client_cert    = "{{ tls_require_and_verify_client_cert }}"
+  tls_disable_client_certs              = "{{ tls_disable_client_certs }}"
   telemetry {
     unauthenticated_metrics_access = "{{ unauthenticated_metrics_access }}"
   }
